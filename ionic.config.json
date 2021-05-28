@@ -1,0 +1,7 @@
+{
+  "name": "todo1-banking-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
