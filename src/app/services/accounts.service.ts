@@ -12,10 +12,17 @@ export class AccountsService {
     private afs: AngularFirestore,
   ) { }
 
-  getAccounts(email){
+  getAccountsAsPromise(email){
     return this.afs.collection(`/clientes/${email}/accounts`).valueChanges().pipe(
       //map((val: Client) => this.customerData = val)
       take(1)
+    );
+  }
+
+  getAccounts(email){
+    return this.afs.collection(`/clientes/${email}/accounts`).valueChanges().pipe(
+      //map((val: Client) => this.customerData = val)
+      // take(1)
     );
   }
 }
