@@ -38,4 +38,8 @@ export class HomePage implements OnInit {
   showDetail(){
     this.router.navigateByUrl("/account-detail");
   }
+
+  transfer(){
+    this.router.navigateByUrl("/others-transfer");
+  }
 }
