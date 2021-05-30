@@ -70,8 +70,8 @@ export class HomePage implements OnInit {
     }
   }
 
-  showDetail(){
-    this.router.navigateByUrl("/account-detail");
+  showDetail(accountNumber){
+    this.router.navigate(["/account-detail",accountNumber]);
   }
 
   async transfer(){
