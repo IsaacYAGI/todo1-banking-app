@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
 
   createForm(){
     this.form = this.formBuilder.group({
-      email:['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
+      email:['jo.smith@todo1.com', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
       password:['', [Validators.required, Validators.minLength(6)]],
     });
   }
@@ -42,7 +42,7 @@ export class LoginPage implements OnInit {
           password: this.form.value.password
         }
         const result = await this.authService.loginUser(body);
-        this.form.reset();
+        this.form.reset({email: "jo.smith@todo1.com"});
         this.router.navigateByUrl("/home");
       } catch (error) {
         const alert = await this.utils.createAlert(error.message, "Error");

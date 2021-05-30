@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Transfer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header style="text-align: center;">
+            <ion-card-subtitle>You successfully transfered to:</ion-card-subtitle>
+            <ion-card-title>JANE SMITH</ion-card-title>
+            <ion-card-title>Account Nº 0002</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label>Amount</ion-label>
+            <ion-note slot="end">100 COL</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Description</ion-label>
+            <ion-note slot="end">Payment</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Date</ion-label>
+            <ion-note slot="end">29/05/2021</ion-note>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="backToHome()">Finish</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

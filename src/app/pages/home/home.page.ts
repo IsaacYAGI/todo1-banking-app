@@ -34,4 +34,12 @@ export class HomePage implements OnInit {
       loading.dismiss();
     }
   }
+
+  showDetail(){
+    this.router.navigateByUrl("/account-detail");
+  }
+
+  transfer(){
+    this.router.navigateByUrl("/others-transfer");
+  }
 }

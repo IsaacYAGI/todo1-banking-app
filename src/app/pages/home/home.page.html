@@ -6,12 +6,65 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title>Home</ion-title>
+    <ion-title>Banking App</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-toolbar>
+          <ion-title>Weather</ion-title>
+        </ion-toolbar>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+
+          <ion-item>
+            <ion-label>Cloudy</ion-label>
+            <ion-avatar slot="end">
+              <img src="https://cdn.glitch.com/6e8889e5-7a72-48f0-a061-863548450de5%2F04d.png">
+            </ion-avatar>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="transfer()">
+              Transfer &nbsp; <ion-icon name="qr-code-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+  
+          <ion-title>Accounts</ion-title>
+        </ion-toolbar>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item (click)="showDetail()">
+            <ion-label>Savings Account</ion-label>
+            <ion-note slot="end">100</ion-note>
+          </ion-item>
+          <ion-item (click)="showDetail()">
+            <ion-label>Checks Account</ion-label>
+            <ion-note slot="end">100</ion-note>
+          </ion-item>
+        
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--<ion-card>
     <ion-card-header>
       <ion-card-title>Welcome</ion-card-title>
     </ion-card-header>
@@ -19,5 +72,6 @@
     <ion-card-content>
      <p>Your email address is {{ email }} </p>
     </ion-card-content>
-  </ion-card>
+  </ion-card>-->
+  
 </ion-content>

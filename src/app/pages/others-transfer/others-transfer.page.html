@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Transfer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header style="text-align: center;">
+            <ion-card-subtitle>You are transfering to:</ion-card-subtitle>
+            <ion-card-title>JANE SMITH</ion-card-title>
+            <ion-card-title>Account Nº 0002</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Amount</ion-label>
+            <ion-input type="number"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="success" (click)="executeTransfer()">Transfer</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
