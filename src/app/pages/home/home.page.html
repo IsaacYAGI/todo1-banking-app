@@ -24,11 +24,14 @@
       <ion-col>
         <ion-list>
 
-          <ion-item>
-            <ion-label>Cloudy</ion-label>
-            <ion-avatar slot="end">
-              <img src="https://cdn.glitch.com/6e8889e5-7a72-48f0-a061-863548450de5%2F04d.png">
+          <ion-item *ngIf="weather != null">
+            <ion-label>{{ weather?.description }}</ion-label>
+            <ion-avatar slot="end" *ngIf="weather.icon != undefined">
+              <img [src]="weather?.icon">
             </ion-avatar>
+          </ion-item>
+          <ion-item *ngIf="weather == null">
+            <ion-label>Loading...</ion-label>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -73,5 +76,4 @@
      <p>Your email address is {{ email }} </p>
     </ion-card-content>
   </ion-card>-->
-  
 </ion-content>

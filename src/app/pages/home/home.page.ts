@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { WeatherService } from 'src/app/services/weather.service';
 
 @Component({
   selector: 'app-home',
@@ -10,16 +12,33 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class HomePage implements OnInit {
 
-  email: string = "";
+  email: string = ""; 
+  weather: any = null;
+  
   constructor(
     public auth: AuthenticationService,
     private router: Router,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private geolocation: Geolocation,
+    private weatherService: WeatherService
   ) {
     auth.userDetails().subscribe(val => this.email = val?.email);
    }
 
   ngOnInit() {
+    this.loadWeather()
+  }
+
+  async loadWeather(){
+    try {
+      const location = await this.geolocation.getCurrentPosition({timeout:10000, enableHighAccuracy:true});
+
+      console.log("YAGI - Actual location:", location);
+      const resultWeather: any = await this.weatherService.getWeather(location);
+      this.weather = resultWeather.weather[0];
+    } catch (error) {
+      console.log('Error getting location', error);
+    }
   }
 
   async logout(){
