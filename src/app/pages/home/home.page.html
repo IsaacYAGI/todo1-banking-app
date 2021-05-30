@@ -53,14 +53,10 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-list>
+        <ion-list *ngFor="let account of accounts">
           <ion-item (click)="showDetail()">
-            <ion-label>Savings Account</ion-label>
-            <ion-note slot="end">100</ion-note>
-          </ion-item>
-          <ion-item (click)="showDetail()">
-            <ion-label>Checks Account</ion-label>
-            <ion-note slot="end">100</ion-note>
+            <ion-label>{{ account.account_type == "SAVINGS" ? "Saving Account" : "Checks Account" }}</ion-label>
+            <ion-note slot="end">{{ account.amount }}</ion-note>
           </ion-item>
         
         </ion-list>
