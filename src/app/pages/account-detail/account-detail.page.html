@@ -18,15 +18,15 @@
       <ion-col>
           <ion-card>
             <ion-card-header style="text-align: center;">
-              <ion-card-subtitle>Savings Account</ion-card-subtitle>
-              <ion-card-title>100 COL</ion-card-title>
+              <ion-card-subtitle>{{ accountDetail?.account_type == "SAVINGS" ? "Saving Account" : "Checks Account" }}</ion-card-subtitle>
+              <ion-card-title>{{ accountDetail?.amount }} COL</ion-card-title>
             </ion-card-header>
           
             <ion-card-content>
              <ion-list lines="none">
                <ion-item text-nowrap>
                  <ion-label slot="start">Account Nº</ion-label>
-                 <ion-label class="ion-text-nowrap"   slot="end">0001</ion-label>
+                 <ion-label class="ion-text-nowrap"   slot="end">{{ accountDetail?.account_number }}</ion-label>
                </ion-item>
              </ion-list>
             </ion-card-content>
