@@ -62,9 +62,9 @@ export class HomePage implements OnInit {
 
   async transfer(){
     const resultBarcode = await this.barcodeScanner.scan();
-    const resultString = JSON.stringify(resultBarcode);
     console.log("YAGI - TRANSFER - BARCODE SCANNER=",JSON.stringify(resultBarcode));
-    alert(resultString);
-    //this.router.navigateByUrl("/others-transfer");
+    // const resultString = JSON.stringify(resultBarcode);
+    // alert(resultString);
+    this.router.navigateByUrl("/others-transfer");
   }
 }
