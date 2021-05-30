@@ -8,6 +8,7 @@ import { map, take } from 'rxjs/operators';
 })
 export class AccountsService {
 
+  selectedDestinationAccount: any = null;
   constructor(
     private afs: AngularFirestore,
   ) { }
