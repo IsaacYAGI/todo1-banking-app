@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { WeatherService } from 'src/app/services/weather.service';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,8 @@ export class HomePage implements OnInit {
     private router: Router,
     private utils: UtilsService,
     private geolocation: Geolocation,
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
+    private barcodeScanner: BarcodeScanner
   ) {
     auth.userDetails().subscribe(val => this.email = val?.email);
    }
@@ -58,7 +60,11 @@ export class HomePage implements OnInit {
     this.router.navigateByUrl("/account-detail");
   }
 
-  transfer(){
+  async transfer(){
+    const resultBarcode = await this.barcodeScanner.scan();
+    console.log("YAGI - TRANSFER - BARCODE SCANNER=",JSON.stringify(resultBarcode));
+    // const resultString = JSON.stringify(resultBarcode);
+    // alert(resultString);
     this.router.navigateByUrl("/others-transfer");
   }
 }
