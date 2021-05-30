@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { Client } from '../interfaces/clients';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,7 @@ export class CustomersService {
     //return this.afs.collection('/clientes/jo.smith@todo1.com/accounts/0001/movements').valueChanges();
     return this.afs.collection(`/clientes`).doc(email).valueChanges().pipe(
       //map((val: Client) => this.customerData = val)
+      take(1)
     );
   }
 }
