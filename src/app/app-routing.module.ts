@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/account-detail/account-detail.module').then( m => m.AccountDetailPageModule),
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'others-transfer',
+    loadChildren: () => import('./pages/others-transfer/others-transfer.module').then( m => m.OthersTransferPageModule)
   }
 
 ];
