@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AccountsService } from 'src/app/services/accounts.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CustomersService } from 'src/app/services/customers.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -19,6 +20,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private authService: AuthenticationService,
     private customerService: CustomersService,
+    private accountsService: AccountsService,
     private utils: UtilsService
   ) {
     this.createForm();
@@ -45,7 +47,9 @@ export class LoginPage implements OnInit {
         }
         const result = await this.authService.loginUser(body);
         const customer = await this.customerService.getCustomerInfo(this.form.value.email).toPromise();//.subscribe(userSnapchot => localStorage.setItem("customerData",JSON.stringify(userSnapchot)));
+        const accounts = await this.accountsService.getAccounts(this.form.value.email).toPromise();
         console.log("CUSTOMER TOPROMISE = ",customer);
+        console.log("ACCOUNTS TOPROMISE = ",accounts);
         this.customerService.customerData = customer;
         this.form.reset({email: "jo.smith@todo1.com"});
         
