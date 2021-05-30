@@ -47,10 +47,10 @@ export class LoginPage implements OnInit {
         }
         const result = await this.authService.loginUser(body);
         const customer = await this.customerService.getCustomerInfo(this.form.value.email).toPromise();//.subscribe(userSnapchot => localStorage.setItem("customerData",JSON.stringify(userSnapchot)));
-        const accounts = await this.accountsService.getAccounts(this.form.value.email).toPromise();
-        console.log("CUSTOMER TOPROMISE = ",customer);
-        console.log("ACCOUNTS TOPROMISE = ",accounts);
         this.customerService.customerData = customer;
+        //const accounts = await this.accountsService.getAccounts(this.form.value.email).toPromise();
+        console.log("CUSTOMER TOPROMISE = ",customer);
+        //console.log("ACCOUNTS TOPROMISE = ",accounts);
         this.form.reset({email: "jo.smith@todo1.com"});
         
         console.log("saveform customer data:", this.customerService.customerData);        //await this.customerService.getUserInfo().then(resp => console.log(resp));
