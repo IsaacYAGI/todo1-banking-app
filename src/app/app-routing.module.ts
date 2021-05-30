@@ -16,7 +16,7 @@ const routes: Routes = [
     data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
-    path: 'account-detail',
+    path: 'account-detail/:accountNumber',
     loadChildren: () => import('./pages/account-detail/account-detail.module').then( m => m.AccountDetailPageModule),
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
