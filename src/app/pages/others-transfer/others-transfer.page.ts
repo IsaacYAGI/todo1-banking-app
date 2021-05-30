@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,13 +9,26 @@ import { Router } from '@angular/router';
 })
 export class OthersTransferPage implements OnInit {
 
+  form: FormGroup;
+
   constructor(
     private router: Router,
-  ) { }
+    private formBuilder: FormBuilder,
+  ) { 
+    this.createForm();
+  }
 
   ngOnInit() {
   }
 
+  createForm(){
+    this.form = this.formBuilder.group({
+      source_account:[null, [Validators.required]],
+      amount:['', [Validators.required]],
+      description:['', [Validators.required]],
+    });
+  }
+  
   executeTransfer(){
     this.router.navigateByUrl("/others-transfer-summary");
   }
