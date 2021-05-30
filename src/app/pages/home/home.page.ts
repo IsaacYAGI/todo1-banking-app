@@ -5,6 +5,9 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { WeatherService } from 'src/app/services/weather.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Account } from 'src/app/interfaces/account';
+import { AccountsService } from 'src/app/services/accounts.service';
+import { CustomersService } from 'src/app/services/customers.service';
 
 @Component({
   selector: 'app-home',
@@ -15,22 +18,33 @@ export class HomePage implements OnInit {
 
   email: string = ""; 
   weather: any = null;
-  
+  accounts: Account[];
   constructor(
     public auth: AuthenticationService,
     private router: Router,
     private utils: UtilsService,
     private geolocation: Geolocation,
     private weatherService: WeatherService,
-    private barcodeScanner: BarcodeScanner
+    private barcodeScanner: BarcodeScanner,
+    private accountsService: AccountsService,
+    private customerService: CustomersService,
+
+
   ) {
     auth.userDetails().subscribe(val => this.email = val?.email);
    }
 
   ngOnInit() {
     this.loadWeather()
+    this.loadAccounts();
   }
 
+  loadAccounts(){
+    this.accountsService.getAccounts(this.customerService.customerData.email).subscribe((result: Account[]) => {
+      this.accounts = result;
+      console.log(this.accounts);
+    });
+  }
   async loadWeather(){
     try {
       const location = await this.geolocation.getCurrentPosition({timeout:10000, enableHighAccuracy:true});
@@ -61,8 +75,8 @@ export class HomePage implements OnInit {
   }
 
   async transfer(){
-    const resultBarcode = await this.barcodeScanner.scan();
-    console.log("YAGI - TRANSFER - BARCODE SCANNER=",JSON.stringify(resultBarcode));
+    //const resultBarcode = await this.barcodeScanner.scan();
+    //console.log("YAGI - TRANSFER - BARCODE SCANNER=",JSON.stringify(resultBarcode));
     // const resultString = JSON.stringify(resultBarcode);
     // alert(resultString);
     this.router.navigateByUrl("/others-transfer");
