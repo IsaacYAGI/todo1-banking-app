@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 
 @Injectable({
@@ -30,6 +30,20 @@ export class AccountsService {
     return this.afs.collection(`/clientes/${email}/accounts`).doc(accountNumber).valueChanges().pipe(
       //map((val: Client) => this.customerData = val)
       // take(1)
+    );
+  }
+
+  getAccountMovements(email,accountNumber){
+    return this.afs.collection(`/clientes/${email}/accounts/${accountNumber}/movements`, ref => ref
+      .orderBy("date","desc")
+      .limit(10)
+    ).valueChanges().pipe(
+      map((val: any) => {
+        return val.map(elem =>{
+          elem.date = new Date(elem.date);
+          return elem;
+        })
+      })
     );
   }
 }
