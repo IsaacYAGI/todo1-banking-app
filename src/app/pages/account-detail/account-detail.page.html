@@ -1,9 +1,50 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>account-detail</ion-title>
+    <ion-title>Account Detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <ion-card>
+            <ion-card-header style="text-align: center;">
+              <ion-card-subtitle>Savings Account</ion-card-subtitle>
+              <ion-card-title>100 COL</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+             <ion-list lines="none">
+               <ion-item text-nowrap>
+                 <ion-label slot="start">Account Nº</ion-label>
+                 <ion-label class="ion-text-nowrap"   slot="end">0001</ion-label>
+               </ion-item>
+             </ion-list>
+            </ion-card-content>
+          </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list class="history">
+          <ion-item>
+            <ion-label>29/05/2021</ion-label>
+            <ion-label>Pago de servicios</ion-label>
+            <ion-note slot="end">-1000 COL</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>29/05/2021</ion-label>
+            <ion-label>Transferencia</ion-label>
+            <ion-note slot="end">-100 COL</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>29/05/2021</ion-label>
+            <ion-label>Pago</ion-label>
+            <ion-note slot="end">+1000 COL</ion-note>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
