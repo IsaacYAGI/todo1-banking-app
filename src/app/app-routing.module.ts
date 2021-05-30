@@ -23,11 +23,15 @@ const routes: Routes = [
   },
   {
     path: 'others-transfer',
-    loadChildren: () => import('./pages/others-transfer/others-transfer.module').then( m => m.OthersTransferPageModule)
+    loadChildren: () => import('./pages/others-transfer/others-transfer.module').then( m => m.OthersTransferPageModule),
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'others-transfer-summary',
-    loadChildren: () => import('./pages/others-transfer-summary/others-transfer-summary.module').then( m => m.OthersTransferSummaryPageModule)
+    loadChildren: () => import('./pages/others-transfer-summary/others-transfer-summary.module').then( m => m.OthersTransferSummaryPageModule),
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   }
 
 ];
