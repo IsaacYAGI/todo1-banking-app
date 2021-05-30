@@ -24,6 +24,10 @@ const routes: Routes = [
   {
     path: 'others-transfer',
     loadChildren: () => import('./pages/others-transfer/others-transfer.module').then( m => m.OthersTransferPageModule)
+  },
+  {
+    path: 'others-transfer-summary',
+    loadChildren: () => import('./pages/others-transfer-summary/others-transfer-summary.module').then( m => m.OthersTransferSummaryPageModule)
   }
 
 ];
