@@ -25,4 +25,11 @@ export class AccountsService {
       // take(1)
     );
   }
+
+  getAccount(email,accountNumber){
+    return this.afs.collection(`/clientes/${email}/accounts`).doc(accountNumber).valueChanges().pipe(
+      //map((val: Client) => this.customerData = val)
+      // take(1)
+    );
+  }
 }
