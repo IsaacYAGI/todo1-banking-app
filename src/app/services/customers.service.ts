@@ -9,7 +9,7 @@ import { map, take } from 'rxjs/operators';
 })
 export class CustomersService {
 
-  customerData: Client;
+  customerData: any;
   authUser: firebase.User;
   constructor(
     private afs: AngularFirestore,

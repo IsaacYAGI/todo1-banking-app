@@ -44,11 +44,12 @@ export class LoginPage implements OnInit {
           password: this.form.value.password
         }
         const result = await this.authService.loginUser(body);
-        this.customerService.getCustomerInfo(this.form.value.email).subscribe(userSnapchot => localStorage.setItem("customerData",JSON.stringify(userSnapchot)));
+        const customer = await this.customerService.getCustomerInfo(this.form.value.email).toPromise();//.subscribe(userSnapchot => localStorage.setItem("customerData",JSON.stringify(userSnapchot)));
+        console.log("CUSTOMER TOPROMISE = ",customer);
+        this.customerService.customerData = customer;
         this.form.reset({email: "jo.smith@todo1.com"});
-
-        console.log("saveform customer data:", this.customerService.customerData);
-        //await this.customerService.getUserInfo().then(resp => console.log(resp));
+        
+        console.log("saveform customer data:", this.customerService.customerData);        //await this.customerService.getUserInfo().then(resp => console.log(resp));
         //await this.customerService.getUserInfo().then(resp => console.log(resp));
         this.router.navigateByUrl("/home");
       } catch (error) {
