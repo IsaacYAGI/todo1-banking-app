@@ -6,12 +6,35 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title>Home</ion-title>
+    <ion-title>Banking App</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h1>Accounts</h1>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label>Savings Account</ion-label>
+            <ion-note slot="end">100</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Checks Account</ion-label>
+            <ion-note slot="end">100</ion-note>
+          </ion-item>
+        
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--<ion-card>
     <ion-card-header>
       <ion-card-title>Welcome</ion-card-title>
     </ion-card-header>
@@ -19,5 +42,6 @@
     <ion-card-content>
      <p>Your email address is {{ email }} </p>
     </ion-card-content>
-  </ion-card>
+  </ion-card>-->
+  
 </ion-content>
