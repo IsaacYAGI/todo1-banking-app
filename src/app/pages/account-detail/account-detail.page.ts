@@ -29,6 +29,10 @@ export class AccountDetailPage implements OnInit {
     });
 
     this.accountsService.getAccount(this.customerService.customerData.email, this.accountNumber).subscribe((account: any) => this.accountDetail = account)
+    this.accountsService.getAccountMovements(this.customerService.customerData.email, this.accountNumber).subscribe((movements: any) => {
+      this.accountDetail.movements = movements;
+      // console.log(this.accountDetail);
+    })
   }
 
   async getQRCode(){

@@ -35,21 +35,11 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-list class="history">
+        <ion-list class="history" *ngFor="let movement of accountDetail?.movements">
           <ion-item>
-            <ion-label>29/05/2021</ion-label>
-            <ion-label>Pago de servicios</ion-label>
-            <ion-note slot="end">-1000 COL</ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-label>29/05/2021</ion-label>
-            <ion-label>Transferencia</ion-label>
-            <ion-note slot="end">-100 COL</ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-label>29/05/2021</ion-label>
-            <ion-label>Pago</ion-label>
-            <ion-note slot="end">+1000 COL</ion-note>
+            <ion-label>{{ movement?.date | date: 'dd/MM/yyyy'}}</ion-label>
+            <ion-label>{{ movement?.description }}</ion-label>
+            <ion-note slot="end">{{ movement?.movement_type == "INCOME" ? "+" : "-" }}{{ movement?.amount }}</ion-note>
           </ion-item>
         </ion-list>
       </ion-col>
