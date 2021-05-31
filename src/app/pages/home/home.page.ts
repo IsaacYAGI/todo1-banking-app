@@ -18,6 +18,7 @@ export class HomePage implements OnInit {
 
   email: string = ""; 
   weather: any = null;
+  weatherError: boolean = false;
   accounts: Account[];
   constructor(
     public auth: AuthenticationService,
@@ -54,6 +55,7 @@ export class HomePage implements OnInit {
       this.weather = resultWeather.weather[0];
     } catch (error) {
       console.log('Error getting location', error);
+      this.weatherError = true;
     }
   }
 
@@ -75,12 +77,12 @@ export class HomePage implements OnInit {
   }
 
   async transfer(){
-    //const resultBarcode = await this.barcodeScanner.scan();
-    const resultBarcode = {
-      format: "QR_CODE",
-      cancelled: false,
-      text: "ja.smith@todo1.com;0003;Jane;Smith"
-    };
+    const resultBarcode = await this.barcodeScanner.scan();
+    // const resultBarcode = {
+    //   format: "QR_CODE",
+    //   cancelled: false,
+    //   text: "ja.smith@todo1.com;0003;Jane;Smith"
+    // };
     if (resultBarcode.cancelled) return;
     console.log("YAGI - TRANSFER - BARCODE SCANNER=",JSON.stringify(resultBarcode));
     const resultString = JSON.stringify(resultBarcode);

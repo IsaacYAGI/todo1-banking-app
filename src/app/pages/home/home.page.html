@@ -30,8 +30,11 @@
               <img [src]="weather?.icon">
             </ion-avatar>
           </ion-item>
-          <ion-item *ngIf="weather == null">
+          <ion-item *ngIf="weather == null && !weatherError">
             <ion-label>Loading...</ion-label>
+          </ion-item>
+          <ion-item *ngIf="weatherError">
+            <ion-label>Location no available</ion-label>
           </ion-item>
         </ion-list>
       </ion-col>
