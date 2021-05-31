@@ -11,6 +11,7 @@ import { Movement } from '../interfaces/movement';
 export class AccountsService {
 
   selectedDestinationAccount: any = null;
+  lastTransferOperation: Movement = null;
   constructor(
     private afs: AngularFirestore,
   ) { }
@@ -62,5 +63,10 @@ export class AccountsService {
 
   addMovement(email: string, accountNumber: string, movement: Movement){
     return this.afs.collection(`/clientes/${email}/accounts/${accountNumber}/movements`).add(movement);
+  }
+
+  cleanSelectedAccount(){
+    this.selectedDestinationAccount = null;
+    this.lastTransferOperation = null;
   }
 }
