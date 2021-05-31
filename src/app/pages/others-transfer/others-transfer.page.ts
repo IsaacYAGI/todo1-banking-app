@@ -59,6 +59,21 @@ export class OthersTransferPage implements OnInit {
       await alert.present();
       return;
     }
+    const loading = await this.utils.createLoading();
+    await loading.present();
+    let destinationAccount: any = await this.accountsService.getAccountAsPromise(this.destinationData.client_target_email,this.destinationData.account_number).toPromise();
+    let currentClientAccount: any = await this.accountsService.getAccountAsPromise(this.customerService.customerData.email,this.accounts[this.form.get("source_account").value].account_number).toPromise();
+    
+    const amountToTransfer = this.form.get("amount").value;
+
+    destinationAccount.amount = destinationAccount.amount + amountToTransfer;
+    currentClientAccount.amount = currentClientAccount.amount - amountToTransfer;
+    console.log("destinationAccount:",destinationAccount,"currentClientAccount:", currentClientAccount);
+    const resultDestinationTransfer = await this.accountsService.updateAccount(this.destinationData.client_target_email,this.destinationData.account_number, destinationAccount);
+    const resultSourceTransfer = await this.accountsService.updateAccount(this.customerService.customerData.email,this.accounts[this.form.get("source_account").value].account_number, currentClientAccount);
+    console.log("resultDestinationTransfer:",resultDestinationTransfer);
+    console.log("resultSourceTransfer:",resultSourceTransfer);
+    loading.dismiss();
     this.router.navigateByUrl("/others-transfer-summary");
   }
 
