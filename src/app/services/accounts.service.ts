@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map, take } from 'rxjs/operators';
+import { Account } from '../interfaces/account';
 
 
 @Injectable({
@@ -52,5 +53,9 @@ export class AccountsService {
         })
       })
     );
+  }
+
+  updateAccount(email: string, accountNumber: string, accountData: Account){
+    return this.afs.collection(`/clientes/${email}/accounts`).doc(accountNumber).set(accountData);
   }
 }
