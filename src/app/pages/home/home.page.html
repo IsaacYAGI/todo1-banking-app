@@ -56,7 +56,7 @@
         <ion-list *ngFor="let account of accounts">
           <ion-item (click)="showDetail(account.account_number)">
             <ion-label>{{ account.account_type == "SAVINGS" ? "Saving Account" : "Checks Account" }}</ion-label>
-            <ion-note slot="end">{{ account.amount }}</ion-note>
+            <ion-note slot="end">{{ account.amount | currency:'COP':'symbol-narrow':'1.2-2'}}</ion-note>
           </ion-item>
         
         </ion-list>

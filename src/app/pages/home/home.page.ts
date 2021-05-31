@@ -76,9 +76,22 @@ export class HomePage implements OnInit {
 
   async transfer(){
     //const resultBarcode = await this.barcodeScanner.scan();
-    //console.log("YAGI - TRANSFER - BARCODE SCANNER=",JSON.stringify(resultBarcode));
-    // const resultString = JSON.stringify(resultBarcode);
-    // alert(resultString);
+    const resultBarcode = {
+      format: "QR_CODE",
+      cancelled: false,
+      text: "ja.smith@todo1.com;0003;Jane;Smith"
+    };
+    if (resultBarcode.cancelled) return;
+    console.log("YAGI - TRANSFER - BARCODE SCANNER=",JSON.stringify(resultBarcode));
+    const resultString = JSON.stringify(resultBarcode);
+    //alert(resultString);
+    const qrData = resultBarcode.text.split(";");
+    this.accountsService.selectedDestinationAccount = {
+      client_target_email: qrData[0],
+      account_number: qrData[1],
+      client_target_name: qrData[2],
+      client_target_lastname: qrData[3]
+    }
     this.router.navigateByUrl("/others-transfer");
   }
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map, take } from 'rxjs/operators';
+import { Account } from '../interfaces/account';
+import { Movement } from '../interfaces/movement';
 
 
 @Injectable({
@@ -8,6 +10,8 @@ import { map, take } from 'rxjs/operators';
 })
 export class AccountsService {
 
+  selectedDestinationAccount: any = null;
+  lastTransferOperation: Movement = null;
   constructor(
     private afs: AngularFirestore,
   ) { }
@@ -26,6 +30,12 @@ export class AccountsService {
     );
   }
 
+  getAccountAsPromise(email,accountNumber){
+    return this.afs.collection(`/clientes/${email}/accounts`).doc(accountNumber).valueChanges().pipe(
+      //map((val: Client) => this.customerData = val)
+      take(1)
+    );
+  }
   getAccount(email,accountNumber){
     return this.afs.collection(`/clientes/${email}/accounts`).doc(accountNumber).valueChanges().pipe(
       //map((val: Client) => this.customerData = val)
@@ -45,5 +55,18 @@ export class AccountsService {
         })
       })
     );
+  }
+
+  updateAccount(email: string, accountNumber: string, accountData: Account){
+    return this.afs.collection(`/clientes/${email}/accounts`).doc(accountNumber).set(accountData);
+  }
+
+  addMovement(email: string, accountNumber: string, movement: Movement){
+    return this.afs.collection(`/clientes/${email}/accounts/${accountNumber}/movements`).add(movement);
+  }
+
+  cleanSelectedAccount(){
+    this.selectedDestinationAccount = null;
+    this.lastTransferOperation = null;
   }
 }

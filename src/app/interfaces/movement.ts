@@ -1,8 +1,8 @@
 export interface Movement{
     amount: number;
-    date: Date;
+    date: Date | number;
     description: string;
     movement_type: "INCOME" | "OUTCOME";
-    targe_account: string;
+    target_account: string;
     source_account?: string;
 }
