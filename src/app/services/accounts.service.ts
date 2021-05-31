@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map, take } from 'rxjs/operators';
 import { Account } from '../interfaces/account';
+import { Movement } from '../interfaces/movement';
 
 
 @Injectable({
@@ -57,5 +58,9 @@ export class AccountsService {
 
   updateAccount(email: string, accountNumber: string, accountData: Account){
     return this.afs.collection(`/clientes/${email}/accounts`).doc(accountNumber).set(accountData);
+  }
+
+  addMovement(email: string, accountNumber: string, movement: Movement){
+    return this.afs.collection(`/clientes/${email}/accounts/${accountNumber}/movements`).add(movement);
   }
 }
