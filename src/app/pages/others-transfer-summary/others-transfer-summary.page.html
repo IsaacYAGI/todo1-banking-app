@@ -11,8 +11,8 @@
         <ion-card>
           <ion-card-header style="text-align: center;">
             <ion-card-subtitle>You successfully transfered to:</ion-card-subtitle>
-            <ion-card-title>JANE SMITH</ion-card-title>
-            <ion-card-title>Account Nº 0002</ion-card-title>
+            <ion-card-title>{{ this.destinationData?.client_target_name }} {{ this.destinationData?.client_target_lastname }}</ion-card-title>
+            <ion-card-title>Account Nº {{ this.destinationData?.account_number }}</ion-card-title>
           </ion-card-header>
         </ion-card>
       </ion-col>
@@ -22,15 +22,15 @@
         <ion-list>
           <ion-item>
             <ion-label>Amount</ion-label>
-            <ion-note slot="end">100 COL</ion-note>
+            <ion-note slot="end">{{ lastTransferData?.amount }} COL</ion-note>
           </ion-item>
           <ion-item>
             <ion-label>Description</ion-label>
-            <ion-note slot="end">Payment</ion-note>
+            <ion-note slot="end">{{ lastTransferData?.description }}</ion-note>
           </ion-item>
           <ion-item>
             <ion-label>Date</ion-label>
-            <ion-note slot="end">29/05/2021</ion-note>
+            <ion-note slot="end">{{ lastTransferData?.date | date: 'dd/MM/yyyy' }}</ion-note>
           </ion-item>
         </ion-list>
       </ion-col>
