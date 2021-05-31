@@ -77,7 +77,9 @@ export class HomePage implements OnInit {
   }
 
   async transfer(){
-    const resultBarcode = await this.barcodeScanner.scan();
+
+    try {
+      const resultBarcode = await this.barcodeScanner.scan();
     // const resultBarcode = {
     //   format: "QR_CODE",
     //   cancelled: false,
@@ -95,5 +97,9 @@ export class HomePage implements OnInit {
       client_target_lastname: qrData[3]
     }
     this.router.navigateByUrl("/others-transfer");
+    } catch (error) {
+      console.error("YAGI - ERROR READING QR CODE:", error);
+    }
+    
   }
 }
