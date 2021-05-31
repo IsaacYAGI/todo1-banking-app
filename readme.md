@@ -52,6 +52,15 @@ Nota: Tener en cuenta que el plugin de lectura de codigo QR no funciona en naveg
 - Se debe crear un proyecto en Firebase nuevo
 - Obtener las credenciales que se colocarán en el archivo ```env.ts``` en el proyecto del frontend.
 - Habilitar en los ```sign in methods ``` el metodo por correo electronico simple.
+- Crear usuarios desde el app, para ello seguir los siguientes pasos:
+    - En el archivo ```src/app/pages/tabs/tabs.page.html``` se debe descomentar el codigo para ver la opción de registro y así poder registrar usuarios para el inicio de sesión
+    ```
+    <ion-tab-button tab="register">
+      <ion-icon name="person-add-outline"></ion-icon>
+      <ion-label>Register</ion-label>
+    </ion-tab-button>
+    ``` 
+    - Registrar usuario desde el app
 - Habilitar base de datos ```firestore```
 - Crear la colección de datos de la siguiente manera:
 ```
