@@ -62,46 +62,53 @@ export class OthersTransferPage implements OnInit {
     }
     const loading = await this.utils.createLoading();
     await loading.present();
-    let destinationAccount: any = await this.accountsService.getAccountAsPromise(this.destinationData.client_target_email,this.destinationData.account_number).toPromise();
-    let currentClientAccount: any = await this.accountsService.getAccountAsPromise(this.customerService.customerData.email,this.accounts[this.form.get("source_account").value].account_number).toPromise();
-    
-    const amountToTransfer = this.form.get("amount").value;
+    try {
 
-    destinationAccount.amount = destinationAccount.amount + amountToTransfer;
-    currentClientAccount.amount = currentClientAccount.amount - amountToTransfer;
-    console.log("destinationAccount:",destinationAccount,"currentClientAccount:", currentClientAccount);
-    const resultDestinationTransfer = await this.accountsService.updateAccount(this.destinationData.client_target_email,this.destinationData.account_number, destinationAccount);
-    const resultSourceTransfer = await this.accountsService.updateAccount(this.customerService.customerData.email,this.accounts[this.form.get("source_account").value].account_number, currentClientAccount);
-    console.log("resultDestinationTransfer:",resultDestinationTransfer);
-    console.log("resultSourceTransfer:",resultSourceTransfer);
-    
-    const transferMovementTarget: Movement = {
-      amount: amountToTransfer,
-      date: new Date().getTime(),
-      description: this.form.get("description").value,
-      movement_type: "INCOME",
-      target_account:this.destinationData.account_number,
-      source_account: this.accounts[this.form.get("source_account").value].account_number
+      let destinationAccount: any = await this.accountsService.getAccountAsPromise(this.destinationData.client_target_email,this.destinationData.account_number).toPromise();
+      let currentClientAccount: any = await this.accountsService.getAccountAsPromise(this.customerService.customerData.email,this.accounts[this.form.get("source_account").value].account_number).toPromise();
+      
+      const amountToTransfer = this.form.get("amount").value;
+
+      destinationAccount.amount = destinationAccount.amount + amountToTransfer;
+      currentClientAccount.amount = currentClientAccount.amount - amountToTransfer;
+      console.log("destinationAccount:",destinationAccount,"currentClientAccount:", currentClientAccount);
+      const resultDestinationTransfer = await this.accountsService.updateAccount(this.destinationData.client_target_email,this.destinationData.account_number, destinationAccount);
+      const resultSourceTransfer = await this.accountsService.updateAccount(this.customerService.customerData.email,this.accounts[this.form.get("source_account").value].account_number, currentClientAccount);
+      console.log("resultDestinationTransfer:",resultDestinationTransfer);
+      console.log("resultSourceTransfer:",resultSourceTransfer);
+      
+      const transferMovementTarget: Movement = {
+        amount: amountToTransfer,
+        date: new Date().getTime(),
+        description: this.form.get("description").value,
+        movement_type: "INCOME",
+        target_account:this.destinationData.account_number,
+        source_account: this.accounts[this.form.get("source_account").value].account_number
+      }
+
+      const resultMovementTarget = await this.accountsService.addMovement(this.destinationData.client_target_email,this.destinationData.account_number, transferMovementTarget);
+
+      const resultMovementSource= await this.accountsService.addMovement(this.customerService.customerData.email,this.accounts[this.form.get("source_account").value].account_number, {
+        amount: amountToTransfer,
+        date: new Date().getTime(),
+        description: this.form.get("description").value,
+        movement_type: "OUTCOME",
+        target_account:this.destinationData.account_number,
+        source_account: this.accounts[this.form.get("source_account").value].account_number
+      });
+      
+      this.accountsService.lastTransferOperation = transferMovementTarget;
+      this.accountsService.lastTransferOperation.date = new Date(this.accountsService.lastTransferOperation.date);
+      console.log("resultMovementTarget:",resultMovementTarget);
+      console.log("resultMovementSource:",resultMovementSource);
+
+      await this.router.navigateByUrl("/others-transfer-summary");
+
+    } catch (error) {
+      console.error("YAGI - ERROR WHEN TRANSFERING:",error);
+    }finally{
+      loading.dismiss();
     }
-
-    const resultMovementTarget = await this.accountsService.addMovement(this.destinationData.client_target_email,this.destinationData.account_number, transferMovementTarget);
-
-    const resultMovementSource= await this.accountsService.addMovement(this.customerService.customerData.email,this.accounts[this.form.get("source_account").value].account_number, {
-      amount: amountToTransfer,
-      date: new Date().getTime(),
-      description: this.form.get("description").value,
-      movement_type: "OUTCOME",
-      target_account:this.destinationData.account_number,
-      source_account: this.accounts[this.form.get("source_account").value].account_number
-    });
-    
-    this.accountsService.lastTransferOperation = transferMovementTarget;
-    this.accountsService.lastTransferOperation.date = new Date(this.accountsService.lastTransferOperation.date);
-    console.log("resultMovementTarget:",resultMovementTarget);
-    console.log("resultMovementSource:",resultMovementSource);
-
-    loading.dismiss();
-    this.router.navigateByUrl("/others-transfer-summary");
   }
 
 }
