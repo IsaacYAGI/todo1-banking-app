@@ -22,7 +22,7 @@
         <ion-list>
           <ion-item>
             <ion-label>Amount</ion-label>
-            <ion-note slot="end">{{ lastTransferData?.amount }} COL</ion-note>
+            <ion-note slot="end">{{ lastTransferData?.amount | currency:'COP':'symbol-narrow':'1.2-2' }} </ion-note>
           </ion-item>
           <ion-item>
             <ion-label>Description</ion-label>

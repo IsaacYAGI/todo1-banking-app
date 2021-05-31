@@ -19,7 +19,7 @@
           <ion-card>
             <ion-card-header style="text-align: center;">
               <ion-card-subtitle>{{ accountDetail?.account_type == "SAVINGS" ? "Saving Account" : "Checks Account" }}</ion-card-subtitle>
-              <ion-card-title>{{ accountDetail?.amount }} COL</ion-card-title>
+              <ion-card-title>{{ accountDetail?.amount | currency:'COP':'symbol-narrow':'1.2-2' }} </ion-card-title>
             </ion-card-header>
           
             <ion-card-content>
@@ -39,7 +39,7 @@
           <ion-item>
             <ion-label>{{ movement?.date | date: 'dd/MM/yyyy'}}</ion-label>
             <ion-label>{{ movement?.description }}</ion-label>
-            <ion-note slot="end">{{ movement?.movement_type == "INCOME" ? "+" : "-" }}{{ movement?.amount }}</ion-note>
+            <ion-note slot="end">{{ movement?.movement_type == "INCOME" ? "+" : "-" }}{{ movement?.amount | currency:'COP':'symbol-narrow':'1.2-2'}}</ion-note>
           </ion-item>
         </ion-list>
       </ion-col>
