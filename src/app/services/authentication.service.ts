@@ -19,11 +19,17 @@ export class AuthenticationService {
   }
 
   logoutUser() {
+      this.clearLocalStorage();
+
       if (this.afAuth.currentUser) {
         return this.afAuth.signOut();
       }else{
         return Promise.resolve();
       }
+  }
+
+  clearLocalStorage(){
+    localStorage.clear();
   }
 
   userDetails() {

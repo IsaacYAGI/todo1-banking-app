@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Transfer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header style="text-align: center;">
+            <ion-card-subtitle>You are transfering to:</ion-card-subtitle>
+            <ion-card-title>{{ this.destinationData.client_target_name }} {{ this.destinationData.client_target_lastname }}</ion-card-title>
+            <ion-card-title>Account Nº {{ this.destinationData.account_number }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <form [formGroup]="form" (ngSubmit)="executeTransfer()">
+
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-item>
+              <ion-label>Source Account</ion-label>
+              <ion-select 
+                interface="popover" 
+                formControlName="source_account"
+              >
+                
+                <ion-select-option  
+                  *ngFor="let account of accounts; let i = index" 
+                  [value]="i"
+                >
+                  Nº{{ account?.account_number }} - {{ account?.amount }} COL
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Amount</ion-label>
+              <ion-input type="number" formControlName="amount"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Description</ion-label>
+              <ion-input formControlName="description"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" color="success" type="submit" [disabled]="form.invalid">Transfer</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

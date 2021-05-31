@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="getQRCode()">
+        <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Account Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <ion-card>
+            <ion-card-header style="text-align: center;">
+              <ion-card-subtitle>{{ accountDetail?.account_type == "SAVINGS" ? "Saving Account" : "Checks Account" }}</ion-card-subtitle>
+              <ion-card-title>{{ accountDetail?.amount | currency:'COP':'symbol-narrow':'1.2-2' }} </ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+             <ion-list lines="none">
+               <ion-item text-nowrap>
+                 <ion-label slot="start">Account Nº</ion-label>
+                 <ion-label class="ion-text-nowrap"   slot="end">{{ accountDetail?.account_number }}</ion-label>
+               </ion-item>
+             </ion-list>
+            </ion-card-content>
+          </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list class="history" *ngFor="let movement of accountDetail?.movements">
+          <ion-item>
+            <ion-label>{{ movement?.date | date: 'dd/MM/yyyy'}}</ion-label>
+            <ion-label>{{ movement?.description }}</ion-label>
+            <ion-note slot="end" [color]="movement?.movement_type == 'INCOME' ? 'default':'danger'">{{ movement?.movement_type == "INCOME" ? "+" : "-" }}{{ movement?.amount | currency:'COP':'symbol-narrow':'1.2-2'}}</ion-note>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
