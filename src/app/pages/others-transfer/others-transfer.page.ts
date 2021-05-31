@@ -73,6 +73,28 @@ export class OthersTransferPage implements OnInit {
     const resultSourceTransfer = await this.accountsService.updateAccount(this.customerService.customerData.email,this.accounts[this.form.get("source_account").value].account_number, currentClientAccount);
     console.log("resultDestinationTransfer:",resultDestinationTransfer);
     console.log("resultSourceTransfer:",resultSourceTransfer);
+    
+    const resultMovementTarget = await this.accountsService.addMovement(this.destinationData.client_target_email,this.destinationData.account_number, {
+      amount: amountToTransfer,
+      date: new Date().getTime(),
+      description: this.form.get("description").value,
+      movement_type: "INCOME",
+      target_account:this.destinationData.account_number,
+      source_account: this.accounts[this.form.get("source_account").value].account_number
+    });
+
+    const resultMovementSource= await this.accountsService.addMovement(this.customerService.customerData.email,this.accounts[this.form.get("source_account").value].account_number, {
+      amount: amountToTransfer,
+      date: new Date().getTime(),
+      description: this.form.get("description").value,
+      movement_type: "OUTCOME",
+      target_account:this.destinationData.account_number,
+      source_account: this.accounts[this.form.get("source_account").value].account_number
+    });
+    
+    console.log("resultMovementTarget:",resultMovementTarget);
+    console.log("resultMovementSource:",resultMovementSource);
+
     loading.dismiss();
     this.router.navigateByUrl("/others-transfer-summary");
   }
